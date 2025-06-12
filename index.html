@@ -4,40 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guess the Word Game</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-size: cover;
-      background-position: center;
-      margin: 0;
-      padding: 0;
-    }
-    #game-container {
-      margin-top: 50px;
-    }
-    #revealedWords {
-      font-size: 24px;
-      margin: 20px 0;
-    }
-    input, button {
-      font-size: 18px;
-      padding: 10px;
-      margin: 5px;
-    }
-    button {
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="game-container">
-    <h1>Guess the Word Game</h1>
+    <h1>Martins guess the prompt</h1>
+    <h3>Guess which prompt generated this image</h3>
+    <div id="revealedWords"></div>
+    <div id="imageContainer">
+      <img id="promptImage" src="" alt="Prompt Image">
+    </div>
     <div>
       <input type="text" id="guessInput" placeholder="Type your guess here" />
       <button id="submitGuess">Submit Guess</button>
     </div>
-    <div id="revealedWords"></div>
   </div>
   <script src="script.js"></script>
 </body>

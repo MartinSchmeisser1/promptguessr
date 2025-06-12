@@ -1,34 +1,73 @@
+/* General body styling */
 body {
   font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
-  background-color: #f4f4f9;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
 }
 
-.game-container {
+/* Game container styling */
+#game-container {
   text-align: center;
-  max-width: 400px;
+  max-width: 800px;
   width: 100%;
+  margin: 0 auto;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* Styling for revealed words */
+#revealedWords {
+  font-size: 24px;
   margin-bottom: 20px;
+  word-spacing: 10px;
 }
 
-#guess-input {
+/* Image container styling */
+#imageContainer {
   width: 100%;
+  max-width: 600px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image styling */
+#promptImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Input field styling */
+#guessInput {
+  width: 80%;
   padding: 10px;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
-#revealed-words {
-  font-size: 18px;
-  color: #333;
-  word-spacing: 10px;
+/* Button styling */
+#submitGuess {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+#submitGuess:hover {
+  background-color: #0056b3;
 }

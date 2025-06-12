@@ -1,6 +1,7 @@
 const guessInput = document.getElementById("guessInput");
 const submitGuess = document.getElementById("submitGuess");
 const revealedWordsElement = document.getElementById("revealedWords");
+const promptImage = document.getElementById("promptImage");
 
 let prompts = []; // Loaded from prompts.json
 let currentPromptIndex = 0;
@@ -22,8 +23,9 @@ function loadPrompt(index) {
   remainingWords = prompt.prompt.map(word => word.toLowerCase()); // Normalize all words to lowercase
   revealedWords = Array(remainingWords.length).fill("_"); // Create underscores for each word
   updateRevealedWords();
-  document.body.style.background = `url(${prompt.image}) no-repeat center center`;
-  document.body.style.backgroundSize = "cover";
+
+  // Set the image source
+  promptImage.src = prompt.image;
 }
 
 // Update the revealed words display
@@ -38,6 +40,9 @@ function checkGuess(guess) {
     revealedWords[wordIndex] = remainingWords[wordIndex]; // Reveal the guessed word
     remainingWords[wordIndex] = null; // Mark the word as guessed
     updateRevealedWords();
+
+    // Display "WOW" image at a random position
+    displayWowImage();
 
     // Check if all words have been guessed
     if (remainingWords.every(word => word === null)) {
@@ -57,9 +62,57 @@ function checkGuess(guess) {
       }, 1000);
     }
   } else {
-    alert("Incorrect guess! Try again.");
+    // Display "WRONG" message at a random position
+    displayWrongMessage();
     guessInput.value = ""; // Clear input for another attempt
   }
+}
+
+// Function to display "WOW" image
+function displayWowImage() {
+  const wowImage = document.createElement("img");
+  wowImage.src = "./assets/wow.jpg";
+  wowImage.style.position = "absolute";
+  wowImage.style.width = "100px"; // Set a fixed width for the image
+  wowImage.style.height = "auto"; // Maintain aspect ratio
+
+  // Generate random position within the viewport
+  const randomX = Math.random() * (window.innerWidth - 100); // Subtract width of the image
+  const randomY = Math.random() * (window.innerHeight - 100); // Subtract height of the image
+  wowImage.style.left = `${randomX}px`;
+  wowImage.style.top = `${randomY}px`;
+
+  // Add the image to the body
+  document.body.appendChild(wowImage);
+
+  // Remove the image after 1 second
+  setTimeout(() => {
+    document.body.removeChild(wowImage);
+  }, 1000);
+}
+
+// Function to display "WRONG" message
+function displayWrongMessage() {
+  const wrongMessage = document.createElement("div");
+  wrongMessage.textContent = "WRONG";
+  wrongMessage.style.position = "absolute";
+  wrongMessage.style.color = "red";
+  wrongMessage.style.fontSize = "24px";
+  wrongMessage.style.fontWeight = "bold";
+
+  // Generate random position within the viewport
+  const randomX = Math.random() * (window.innerWidth - 100); // Subtract width of the message
+  const randomY = Math.random() * (window.innerHeight - 50); // Subtract height of the message
+  wrongMessage.style.left = `${randomX}px`;
+  wrongMessage.style.top = `${randomY}px`;
+
+  // Add the message to the body
+  document.body.appendChild(wrongMessage);
+
+  // Remove the message after 1 second
+  setTimeout(() => {
+    document.body.removeChild(wrongMessage);
+  }, 1000);
 }
 
 // Add event listener for the "Submit Guess" button
@@ -67,5 +120,12 @@ submitGuess.addEventListener("click", () => {
   const guess = guessInput.value.trim().toLowerCase();
   if (guess) {
     checkGuess(guess);
+  }
+});
+
+// Add event listener for the "Enter" key
+guessInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    submitGuess.click(); // Trigger the button's click event
   }
 });
