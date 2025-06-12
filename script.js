@@ -44,6 +44,9 @@ function checkGuess(guess) {
     // Display "WOW" image at a random position
     displayWowImage();
 
+    // Clear the input field
+    guessInput.value = "";
+
     // Check if all words have been guessed
     if (remainingWords.every(word => word === null)) {
       guessInput.disabled = true;
@@ -64,7 +67,9 @@ function checkGuess(guess) {
   } else {
     // Display "WRONG" message at a random position
     displayWrongMessage();
-    guessInput.value = ""; // Clear input for another attempt
+
+    // Clear the input field
+    guessInput.value = "";
   }
 }
 
