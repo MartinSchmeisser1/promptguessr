@@ -1,0 +1,23 @@
+[
+    {
+      "image": "assets/sample1.jpg",
+      "prompt": ["create", "a", "picture", "of", "an", "elephant", "riding", "on", "a", "cat", "through", "bavaria"]
+    },
+    {
+      "image": "assets/sample2.jpg",
+        "prompt": ["create", "a", "picture", "of", "a", "giraffe", "sitting", "on", "a", "tree"]
+    },
+    {
+        "image": "assets/sample3.jpg",
+        "prompt": ["create", "a", "picture", "of", "markus", "söder", "drinking", "massive", "amounts", "of", "beer"]
+    },
+    {
+      "image": "assets/sample4.jpg",
+      "prompt": ["create", "a", "picture", "of", "a", "stupid", "but", "cute", "orange", "cat"]
+    },
+    {
+      "image": "assets/sample5.jpg",
+      "prompt": ["create", "a", "picture", "of", "a", "cannabis", "smoking", "alien", "on", "mars"]
+    }
+  ]
+  
