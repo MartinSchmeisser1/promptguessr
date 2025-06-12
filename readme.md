@@ -47,16 +47,6 @@ image2.jpg
 
 ---
 
-## 📌 To-Do List
-
-- [ ] Create `prompts.json` containing image paths and prompt word lists
-- [ ] Build basic UI: image, input field, and revealed words
-- [ ] Implement word-guessing logic
-- [ ] Handle transition to next image after full prompt is guessed
-- [ ] Deploy via GitHub Pages
-
----
-
 ## 🚀 Goal
 
 A simple, fun game to experiment with static web development, image-based prompts, and collaborative guessing — perfect for sharing with friends!

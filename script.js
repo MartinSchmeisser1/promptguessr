@@ -1,74 +1,71 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const imageElement = document.getElementById("image");
-  const revealedWordsElement = document.getElementById("revealed-words");
-  const guessInput = document.getElementById("guess-input");
+const guessInput = document.getElementById("guessInput");
+const submitGuess = document.getElementById("submitGuess");
+const revealedWordsElement = document.getElementById("revealedWords");
 
-  let prompts = [];
-  let currentPromptIndex = 0;
-  let revealedWords = [];
+let prompts = []; // Loaded from prompts.json
+let currentPromptIndex = 0;
+let revealedWords = [];
+let remainingWords = [];
 
-  // Load prompts.json
-  fetch('./prompts.json')
-    .then(response => response.json())
-    .then(data => {
-      prompts = data;
-      loadPrompt(currentPromptIndex);
-    })
-    .catch(error => console.error("Error loading prompts.json:", error));
+// Fetch prompts.json
+fetch('./prompts.json')
+  .then(response => response.json())
+  .then(data => {
+    prompts = data;
+    loadPrompt(currentPromptIndex);
+  })
+  .catch(error => console.error("Error loading prompts.json:", error));
 
-  // Load a specific prompt
-  function loadPrompt(index) {
-    const prompt = prompts[index];
-    imageElement.src = prompt.image;
-    revealedWords = Array(prompt.prompt.length).fill("_");
+// Load the current prompt
+function loadPrompt(index) {
+  const prompt = prompts[index];
+  remainingWords = prompt.prompt.map(word => word.toLowerCase()); // Normalize all words to lowercase
+  revealedWords = Array(remainingWords.length).fill("_"); // Create underscores for each word
+  updateRevealedWords();
+  document.body.style.background = `url(${prompt.image}) no-repeat center center`;
+  document.body.style.backgroundSize = "cover";
+}
+
+// Update the revealed words display
+function updateRevealedWords() {
+  revealedWordsElement.textContent = revealedWords.join(" ");
+}
+
+// Check if the guess is correct
+function checkGuess(guess) {
+  const wordIndex = remainingWords.indexOf(guess); // Check if the guessed word exists in the remaining words
+  if (wordIndex !== -1) {
+    revealedWords[wordIndex] = remainingWords[wordIndex]; // Reveal the guessed word
+    remainingWords[wordIndex] = null; // Mark the word as guessed
     updateRevealedWords();
-  }
 
-  // Update the revealed words display
-  function updateRevealedWords() {
-    revealedWordsElement.textContent = revealedWords.join(" ");
-  }
-
-  // Handle user guesses
-  guessInput.addEventListener("input", () => {
-    const guess = guessInput.value.trim().toLowerCase();
-    if (guess) {
-      const currentPrompt = prompts[currentPromptIndex].prompt;
-      let isCorrect = false;
-
-      currentPrompt.forEach((word, index) => {
-        if (word === guess && revealedWords[index] === "_") {
-          revealedWords[index] = word;
-          isCorrect = true;
-        }
-      });
-
-      if (isCorrect) {
-        updateRevealedWords();
-        checkCompletion();
-      }
-
-      guessInput.value = ""; // Clear the input field
-    }
-  });
-
-  // Check if all words are guessed
-  function checkCompletion() {
-    if (!revealedWords.includes("_")) {
-      // Show a transition message
-      revealedWordsElement.textContent = "Correct! Loading next image...";
+    // Check if all words have been guessed
+    if (remainingWords.every(word => word === null)) {
       guessInput.disabled = true;
+      submitGuess.disabled = true;
 
       setTimeout(() => {
         currentPromptIndex++;
         if (currentPromptIndex < prompts.length) {
           loadPrompt(currentPromptIndex);
           guessInput.disabled = false;
+          submitGuess.disabled = false;
+          guessInput.value = ""; // Clear input for the next round
         } else {
           revealedWordsElement.textContent = "Congratulations! You've completed all prompts!";
-          guessInput.disabled = true; // Disable input after completion
         }
-      }, 1000); // 1-second delay
+      }, 1000);
     }
+  } else {
+    alert("Incorrect guess! Try again.");
+    guessInput.value = ""; // Clear input for another attempt
+  }
+}
+
+// Add event listener for the "Submit Guess" button
+submitGuess.addEventListener("click", () => {
+  const guess = guessInput.value.trim().toLowerCase();
+  if (guess) {
+    checkGuess(guess);
   }
 });
