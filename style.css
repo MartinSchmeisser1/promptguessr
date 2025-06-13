@@ -1,11 +1,13 @@
 /* General styling for the game container */
 #game-container {
   text-align: center;
-  font-family: Arial, sans-serif;
   margin: 20px auto;
   max-width: 600px;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
 h1 {
   font-size: 24px;
   color: #333;
@@ -78,4 +80,47 @@ button#submitGuess:hover {
   margin: 20px auto; /* Add spacing and center the element */
   width: 80%; /* Optional: Limit the width for better readability */
   line-height: 1.6; /* Improve line spacing */
+}
+
+#introduction-page {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#introduction-page h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#introduction-page h3 {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+#introduction-page p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+#introduction-page button#startGame {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#introduction-page button#startGame:hover {
+  background-color: #0056b3;
 }

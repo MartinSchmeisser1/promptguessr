@@ -92,7 +92,7 @@ function checkGuess(guess) {
         } else {
           revealedWordsElement.textContent = "Congratulations! You've completed all prompts!";
         }
-      }, 1000);
+      }, 3000);
     }
   } else {
     // Display "WRONG" message at a random position
