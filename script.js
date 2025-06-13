@@ -7,15 +7,26 @@ let prompts = []; // Loaded from prompts.json
 let currentPromptIndex = 0;
 let revealedWords = [];
 let remainingWords = [];
+let wrongGuessCounter = 0; // Counter for consecutive wrong guesses
+
 
 // Fetch prompts.json
 fetch('./prompts.json')
   .then(response => response.json())
   .then(data => {
-    prompts = data;
+    prompts = shuffleArray(data); // Shuffle the prompts array
     loadPrompt(currentPromptIndex);
   })
   .catch(error => console.error("Error loading prompts.json:", error));
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 
 // Load the current prompt
 function loadPrompt(index) {
@@ -64,6 +75,8 @@ function checkGuess(guess) {
     // Clear the input field
     guessInput.value = "";
 
+    wrongGuessCounter = 0; // Reset the wrong guess counter
+
     // Check if all words have been guessed
     if (remainingWords.every(word => word === null)) {
       guessInput.disabled = true;
@@ -87,6 +100,29 @@ function checkGuess(guess) {
 
     // Clear the input field
     guessInput.value = "";
+
+    wrongGuessCounter++; // Increment the wrong guess counter
+    if (wrongGuessCounter >= 10) {
+      revealRandomWord(); // Reveal a random word if 10 wrong guesses in a row
+      wrongGuessCounter = 0; // Reset the counter
+    }
+  }
+}
+
+// Function to reveal a random word
+function revealRandomWord() {
+  const unrevealedIndices = remainingWords.reduce((acc, word, index) => {
+    if (word !== null) {
+      acc.push(index);
+    }
+    return acc;
+  }, []);
+
+  if (unrevealedIndices.length > 0) {
+    const randomIndex = unrevealedIndices[Math.floor(Math.random() * unrevealedIndices.length)];
+    revealedWords[randomIndex] = remainingWords[randomIndex];
+    remainingWords[randomIndex] = null;
+    updateRevealedWords();
   }
 }
 

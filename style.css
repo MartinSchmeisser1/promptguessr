@@ -41,11 +41,11 @@ h3 {
 }
 
 #imageContainer {
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 #promptImage {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
   border: 2px solid #ddd;
   border-radius: 8px;
