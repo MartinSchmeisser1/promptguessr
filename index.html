@@ -10,7 +10,10 @@
   <div id="game-container">
     <h1>Martins guess the prompt</h1>
     <h3>Guess which prompt generated this image</h3>
-    <div id="revealedWords"></div>
+    <div id="promptContainer">
+      <span id="promptPrefix">create a picture of</span>
+      <span id="revealedWords"></span>
+    </div>
     <div id="imageContainer">
       <img id="promptImage" src="" alt="Prompt Image">
     </div>
@@ -18,6 +21,11 @@
       <input type="text" id="guessInput" placeholder="Type your guess here" />
       <button id="submitGuess">Submit Guess</button>
     </div>
+  </div>
+  <div id="description">
+    <p>
+      In this game, you need to guess the prompt word by word. The prompt starts hidden, and as you guess correctly, words will be revealed one by one. Try to figure out the full prompt based on the image and your guesses!
+    </p>
   </div>
   <script src="script.js"></script>
 </body>

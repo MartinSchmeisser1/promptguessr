@@ -1,73 +1,81 @@
-/* General body styling */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f4f4f4;
-}
-
-/* Game container styling */
+/* General styling for the game container */
 #game-container {
   text-align: center;
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-/* Styling for revealed words */
-#revealedWords {
-  font-size: 24px;
-  margin-bottom: 20px;
-  word-spacing: 10px;
-}
-
-/* Image container styling */
-#imageContainer {
-  width: 100%;
-  max-width: 600px;
-  height: 300px;
+  font-family: Arial, sans-serif;
   margin: 20px auto;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  max-width: 600px;
 }
 
-/* Image styling */
+h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+h3 {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+#promptContainer {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+#promptPrefix {
+  font-weight: bold;
+  color: #333;
+}
+
+#revealedWords {
+  font-style: italic;
+  color: #555;
+  letter-spacing: 2px; /* Adds spacing between underscores for better readability */
+}
+
+.unrevealed-word {
+  display: inline-block;
+  margin-right: 10px; /* Adds spacing between words */
+  font-size: 18px;
+  color: #888; /* Makes unrevealed words visually distinct */
+}
+
+#imageContainer {
+  margin: 20px auto;
+}
+
 #promptImage {
   max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  height: auto;
+  border: 2px solid #ddd;
+  border-radius: 8px;
 }
 
-/* Input field styling */
-#guessInput {
-  width: 80%;
+input#guessInput {
   padding: 10px;
   font-size: 16px;
-  margin-top: 10px;
+  width: 80%;
+  margin-bottom: 10px;
 }
 
-/* Button styling */
-#submitGuess {
+button#submitGuess {
   padding: 10px 20px;
   font-size: 16px;
-  margin-top: 10px;
-  cursor: pointer;
-  background-color: #007bff;
+  background-color: #007BFF;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-#submitGuess:hover {
+button#submitGuess:hover {
   background-color: #0056b3;
+}
+
+#description {
+  text-align: center; /* Center the text horizontally */
+  font-size: 16px; /* Adjust font size for readability */
+  margin: 20px auto; /* Add spacing and center the element */
+  width: 80%; /* Optional: Limit the width for better readability */
+  line-height: 1.6; /* Improve line spacing */
 }

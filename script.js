@@ -20,7 +20,8 @@ fetch('./prompts.json')
 // Load the current prompt
 function loadPrompt(index) {
   const prompt = prompts[index];
-  remainingWords = prompt.prompt.map(word => word.toLowerCase()); // Normalize all words to lowercase
+  // Split the single prompt string into individual words
+  remainingWords = prompt.prompt.toLowerCase().split(" "); // Normalize all words to lowercase
   revealedWords = Array(remainingWords.length).fill("_"); // Create underscores for each word
   updateRevealedWords();
 
@@ -30,7 +31,23 @@ function loadPrompt(index) {
 
 // Update the revealed words display
 function updateRevealedWords() {
-  revealedWordsElement.textContent = revealedWords.join(" ");
+  revealedWordsElement.innerHTML = ""; // Clear previous content
+
+  revealedWords.forEach((word, index) => {
+    const span = document.createElement("span");
+    if (word === "_") {
+      span.textContent = "_".repeat(remainingWords[index].length); // Display underscores based on word length
+      span.classList.add("unrevealed-word");
+    } else {
+      span.textContent = word; // Display revealed word
+    }
+    revealedWordsElement.appendChild(span);
+    revealedWordsElement.appendChild(document.createTextNode(" ")); // Add space between words
+  });
+
+  // Add a small space between "of" and the first unrevealed word
+  const promptPrefix = document.getElementById("promptPrefix");
+  promptPrefix.innerHTML = "create a picture of&nbsp;";
 }
 
 // Check if the guess is correct
