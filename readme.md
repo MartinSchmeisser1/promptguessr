@@ -3,6 +3,8 @@ That means to use as much AI as possible and to do as little as possible by hand
 
 Let's see if I can create a small browser-based multiplayer-game with the help of AI :)
 
+Try it out here:
+'https://martinschmeisser1.github.io/promptguessr/'
 
 # 🧠 Prompt Guessing Game
 
